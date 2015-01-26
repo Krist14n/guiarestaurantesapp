@@ -1,0 +1,9 @@
+2015-01-02 12:11:31.531 myApp[43359:368499] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/kristiantapiaaleman/Library/Developer/CoreSimulator/Devices/262D8064-D642-4FCE-A9AB-7896B562A492/data/Containers/Data/Application/8C9B73EC-7EA1-4552-8627-CDDD57115A2A/Library/Cookies/Cookies.binarycookies
+2015-01-02 12:11:33.353 myApp[43359:368499] Apache Cordova native platform version 3.7.0 is starting.
+2015-01-02 12:11:33.406 myApp[43359:368499] Multi-tasking -> Device: YES, App: YES
+2015-01-02 12:11:33.466 myApp[43359:368499] Unlimited access to network resources
+2015-01-02 12:11:35.584 myApp[43359:368499] [CDVTimer][keyboard] 0.109971ms
+2015-01-02 12:11:35.584 myApp[43359:368499] [CDVTimer][TotalPluginStartup] 9.344995ms
+2015-01-02 12:11:38.896 myApp[43359:368499] Resetting plugins due to page load.
+2015-01-02 12:11:41.214 myApp[43359:368499] Finished load of: file:///Users/kristiantapiaaleman/Library/Developer/CoreSimulator/Devices/262D8064-D642-4FCE-A9AB-7896B562A492/data/Containers/Bundle/Application/F654F42B-E1EF-452A-8DE2-079AF5704160/myApp.app/www/index.html#/app/playlists
+2015-01-02 12:12:10.462 myApp[43359:368499] THREAD WARNING: ['Keyboard'] took '22.288086' ms. Plugin should use a background thread.
