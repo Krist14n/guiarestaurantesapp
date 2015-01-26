@@ -1,5 +1,12 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova'])
 
+var app = angular.module('starter.controllers', ['ngCordova'])
+
+app.run(function($cordovaSplashscreen) {
+  setTimeout(function() {
+    $cordovaSplashscreen.hide()
+  }, 5000)
+})
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};
