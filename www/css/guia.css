@@ -1,0 +1,57 @@
+.logomenu{
+	margin-left: 30%;
+    display: block;
+    opacity: 1!important;
+}
+
+.logofooter{
+	display: block;
+    width: 100%;
+}
+
+.button-footer-banorte{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.item-menu{
+	border: none;
+	color: white;
+}
+
+.item{
+	background: transparent !important;
+}
+
+.listitem{
+	background: transparent;
+}
+
+.bar-footer-banorte{
+	background-color: #d42135;
+	width: 100%;
+}
+
+.bar-footer-menu{
+	border:none;
+	background: transparent;
+	width: 100%;
+	margin-left: 6%;	
+}
+.menu{
+    background: url('http://i.imgur.com/hgzVvzN.jpg');
+}
+
+.button-menu{
+	text-decoration: none;
+}
+
+.button-footer{
+	padding-right: 16px!important;
+}
+
+.top-bar{
+	background-color: #d42135;
+	color: #FFFFFF;
+}
