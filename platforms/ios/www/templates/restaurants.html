@@ -1,0 +1,38 @@
+<ion-view view-title="Restaurantes" class="menu-title">
+ 	
+ 	<ion-content class="has-header has-footer">
+
+ 		<form class="form-inline has-header">
+			<label class="item item-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input ng-model="query" type="text" placeholder="Buscar restaurantes" autofocus>
+			</label>
+		</form>
+
+		<ion-list>
+			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurants/{{restaurant.id}}"> 
+				<i class="icon-left icon ion-fork button-clear button-dark"></i>
+					{{restaurant.name}}
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+	
+
+	 <div class="tabs-striped tabs-color-assertive has-footer">
+	      <div class="tabs">
+	        <a class="tab-item active" href="#">
+	          Test
+	        </a>
+	        <a class="tab-item" href="#">
+	          Favorites
+	        </a>
+	        <a class="tab-item" href="#">
+	          Settings
+	        </a>
+	      </div>
+	    </div>
+
+
+</ion-view>
+ 
