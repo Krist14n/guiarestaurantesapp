@@ -40,7 +40,7 @@
 	margin-left: 6%;	
 }
 .menu{
-    background: url('http://i.imgur.com/hgzVvzN.jpg');
+    background: url('../img/fondomenu.png');
 }
 
 .button-menu{
@@ -53,5 +53,19 @@
 
 .top-bar{
 	background-color: #d42135;
-	color: #FFFFFF;
+	
+}
+
+.menu-title{
+
+	color:white;
+}
+
+.bar .title{
+	color: white;
+}
+
+.buscador-restaurantes{
+	top: 38px;
+	outline: none;
 }

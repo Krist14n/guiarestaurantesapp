@@ -1,19 +1,29 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content>
+
     <ion-nav-bar class="bar top-bar">
+
       <ion-nav-back-button>
       </ion-nav-back-button>
+
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" style="color:white;" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+
     </ion-nav-bar>
+
     <ion-nav-view name="menuContent"></ion-nav-view>
-    <div class="bar bar-footer bar-footer-banorte">
-      <button class="button button-clear button-footer-banorte">
-        <img src="img/banortewhite.png" class="logofooter">
-      </button>
-    </div>
+
+
+
+    <ion ion-footer-bar>
+      <div class="bar bar-footer bar-footer-banorte">
+        <button class="button button-clear button-footer-banorte">
+          <img src="img/banortewhite.png" class="logofooter">
+        </button>
+      </div>
+    </ion ion-footer-bar> 
   </ion-side-menu-content>
 
   <ion-side-menu side="left" class="menu">
@@ -30,7 +40,7 @@
         </ion-item>
         <ion-item nav-clear menu-close class="item item-icon-left item-menu">
           <i class="icon ion-fork"></i>
-          <a class="button-clear button-menu" style="color:white;" href="#/app/browse">Restaurantes</a>
+          <a class="button-clear button-menu" style="color:white;" href="#/app/restaurants">Restaurantes</a>
         </ion-item>
         <ion-item nav-clear menu-close class="item item-icon-left item-menu">
           <i class="icon ion-location"></i>
