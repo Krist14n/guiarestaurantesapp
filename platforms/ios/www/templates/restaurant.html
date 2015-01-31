@@ -1,0 +1,12 @@
+<ion-view  view-title="" class="">
+  <ion-content ng-repeat="r in restaurant" >
+    <h1>{{r.name}}</h1>
+    <div class="card">
+	  <div class="item item-text-wrap">
+	  	    <img class="full-image" ng-src="../img/fotos_restaurantes/{{r.img}}.jpg">
+	  </div>
+
+	  <p>{{r.calification}}</p>
+	</div>
+  </ion-content>
+</ion-view>

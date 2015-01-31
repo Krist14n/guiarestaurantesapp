@@ -1,0 +1,54 @@
+<ion-view  view-title="Restaurantes" class="">
+
+  <ion-content ng-repeat="r in restaurant" class="has-footer">
+
+		<div class="list card">
+
+			<div class="item item-avatar">
+				<h2>{{r.name}}</h2>
+				<p>{{r.title}}</p>
+			</div>
+
+			<div class="item item-body">
+
+				<img class="full-image"  ng-src="../img/fotos_restaurantes/{{r.img}}.jpg">
+				<p>
+				  {{r.review}}
+				</p>
+
+				<h2>Calificación</h2>
+					<div class="row">
+						<div  ng-repeat="calif in r.calification" class="col">{{calif}}</div>
+					</div>
+
+				<h2>Ideal Para</h2>
+				<p ng-repeat="ideal in r.ideal">
+					{{ideal}}
+				</p>
+
+				<h2>Dirección</h2>
+
+				<div id="map" data-tap-disabled="true">
+				</div>
+
+				<p ng-repeat="direccion in r.address">
+					{{direccion.branch}}
+				</p>
+				<p ng-repeat="tels in r.address">
+					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
+				</p>
+
+				<h2>Precio</h2>
+				<p>
+					<a>$ {{r.cost}}</a>
+				</p>
+			</div>
+
+			<div class="item tabs tabs-secondary tabs-icon-left">
+					
+			</div>
+
+		</div>
+
+  </ion-content>
+</ion-view>

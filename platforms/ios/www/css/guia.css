@@ -65,3 +65,15 @@
 	color: white;
 }
 
+.buscador-restaurantes{
+	top: 38px;
+	outline: none;
+}
+
+.menu-tabs{
+	margin-bottom: 44px;
+	height: 64px;
+}
+.restaurant-titulo{
+	background-color: transparent;
+}
