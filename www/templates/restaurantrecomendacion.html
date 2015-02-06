@@ -36,10 +36,15 @@
 					</div>
 
 				<h2>Ideal Para</h2>
+				<ul>
 				<p ng-repeat="ideal in r.ideal">
-					{{ideal}}
+					&#8226; {{ ideal}}
 				</p>
-
+				</ul>
+				<h2>Marco Recomienda</h2>
+				<p ng-repeat="recom in r.mrecommend">
+					&#8226; {{recom}}
+				</p>
 				<h2>Dirección</h2>
 
 				<div class="card"  >
