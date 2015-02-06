@@ -1,0 +1,30 @@
+<ion-view view-title="Restaurantes por Zona" class="menu-title">
+
+
+<ion-content class="has-header has-footer">
+	<ion-list>
+		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurantzone/{{restaurant.zone}}"> 
+			<i class="button-clear button-dark"></i>
+				{{restaurant.name}}
+		</ion-item>
+	</ion-list>
+</ion-content>
+</ion-view>
+
+<div class="tabs-striped tabs-color-assertive">
+	<div class="tabs menu-tabs">
+	    <a class="tab-item" href="#/app/restaurantscook">
+	      Cocina
+	    </a>
+	    <a class="tab-item" href="#/app/restaurants">
+	      Nombre
+	    </a>
+	    <a class="tab-item" href="#/app/restaurantsplan">
+	      Plan
+	    </a>
+	    <a class="tab-item active" href="#/app/restaurantszone">
+	      Zona
+	    </a>
+	</div>
+</div>
+ 

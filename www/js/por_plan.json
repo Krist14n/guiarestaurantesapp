@@ -1,0 +1,87 @@
+[
+	{
+		"id": "1",
+		"name": "Ambiente",
+		"plancat": "cool"
+	},
+	{
+		"id": "2",
+		"name": "Brunch",
+		"plancat": "brunch"
+	},
+	{
+		"id": "3",
+		"name": "Chic",
+		"plancat": "chic"
+	},
+	{
+		"id": "4",
+		"name": "Desayuno",
+		"plancat": "breakfast"
+	},
+	{
+		"id": "5",
+		"name": "Desvelado",
+		"plancat": "sleepless"
+	},
+	{
+		"id": "6",
+		"name": "De vinos",
+		"plancat": "wine"
+	},
+	{
+		"id": "7",
+		"name": "Familiar",
+		"plancat": "fam"
+	},
+	{
+		"id": "8",
+		"name": "Musica en vivo / DJ",
+		"plancat": "music"
+	},
+	{
+		"id": "9",
+		"name": "Negocios",
+		"plancat": "business"
+	},
+	{
+		"id": "10",
+		"name": "Pet friendly",
+		"plancat": "pet"
+	},
+	{
+		"id": "11",
+		"name": "Pizza / Vino",
+		"plancat": "pizza"
+	},
+	{
+		"id": "12",
+		"name": "Postres",
+		"plancat": "desserts"
+	},
+	{
+		"id": "13",
+		"name": "Románticos / Ocasiones especiales",
+		"plancat": "romantic"
+	},
+	{
+		"id": "14",
+		"name": "Solteros",
+		"plancat": "single"
+	},
+	{
+		"id": "15",
+		"name": "Terraza",
+		"plancat": "ter"
+	},
+	{
+		"id": "16",
+		"name": "Tomar la copa",
+		"plancat": "takecup"
+	},
+	{
+		"id": "17",
+		"name": "Tomar la copa",
+		"plancat": "takecup"
+	}	
+]

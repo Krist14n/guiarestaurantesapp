@@ -43,78 +43,144 @@ app.run(function($cordovaSplashscreen) {
 
   //Restaurant List from .json
 
-.controller('RestaurantsCtrl', function($scope, $http){
-    $http.get('js/guiderest.json').success(function(data){
-      $scope.restaurants = data;
-    })
-  })
+.controller('RestaurantsCtrl', function($scope , $stateParams, $http){
 
+        $http.get('js/guiderest.json').success(function(data){
+          $scope.restaurants = data;
+        })
+})
 
-.controller('RestaurantCtrl', function($scope, $stateParams, $http, $compile){
+  //Single restaurant 
+.controller('RestaurantCtrl', function($scope, $stateParams, $http){
+
+  google.maps.event.addDomListener(window, 'load', function() {
+
+      var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+
+      var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      navigator.geolocation.getCurrentPosition(function(pos) {
+          map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+          var myLocation = new google.maps.Marker({
+              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+              map: map,
+              title: "My Location"
+          });
+      });
+
+      $scope.map = map;
+   
+  });
+
   var filter = $stateParams.restaurantId;  
 
   $http.get('js/guiderest.json').success(function(data){ 
     var result = $.grep(data, function(e){ return e.id == filter; });
     $scope.restaurant = result;
+  });
 
-    function initialize() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
-        
-        var mapOptions = {
+})
+
+
+//Restaurant list by food 
+
+.controller('RestaurantsByCookCtrl', function($scope, $http){
+  $http.get('js/tipos_comida.json').success(function(data){
+      $scope.restaurants = data;
+  })
+})
+
+//Internal Restaurant list by food 
+.controller('RestaurantsListByCookCtrl', function($scope, $stateParams, $http){
+  var filter = $stateParams;
+  $http.get('js/guiderest.json').success(function(data){
+      var result = $.grep(data, function(e){ return e.cook == filter.cookId; });
+      $scope.restaurants = result;
+  })
+
+})
+
+//Restaurant list by zone 
+
+.controller('RestaurantsByZoneCtrl', function($scope, $http){
+  $http.get('js/por_zona.json').success(function(data){
+      $scope.restaurants = data;
+  })
+})
+
+//Internal Restaurant list by zone 
+.controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http){
+  var filter = $stateParams;
+  $http.get('js/guiderest.json').success(function(data){
+      var result = $.grep(data, function(e){ return e.zone == filter.zoneId; });
+      $scope.restaurants = result;
+  })
+
+})
+
+//Restaurant list by plan 
+
+.controller('RestaurantsByPlanCtrl', function($scope, $http){
+  $http.get('js/por_plan.json').success(function(data){
+      $scope.restaurants = data;
+  })
+})
+
+//Internal Restaurant list by plan 
+.controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http){
+  var filter = $stateParams;
+  $http.get('js/guiderest.json').success(function(data){
+      var result = $.grep(data, function(e){ return e.plancat == filter.planId; });
+      $scope.restaurants = result;
+  })
+
+})
+
+
+.controller('RestaurantRecomendacionCtrl', function($scope, $http){
+
+  google.maps.event.addDomListener(window, 'load', function() {
+
+      var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+
+      var mapOptions = {
           center: myLatlng,
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"),
-            mapOptions);
-        
-        //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-        var compiled = $compile(contentString)($scope);
-
-        var infowindow = new google.maps.InfoWindow({
-          content: compiled[0]
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        });
-
-        $scope.map = map;
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-      
-      $scope.centerOnMe = function() {
-        if(!$scope.map) {
-          return;
-        }
-
-        $scope.loading = $ionicLoading.show({
-          content: 'Getting current location...',
-          showBackdrop: false
-        });
-
-        navigator.geolocation.getCurrentPosition(function(pos) {
-          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          $scope.loading.hide();
-        }, function(error) {
-          alert('Unable to get location: ' + error.message);
-        });
       };
-      
-      $scope.clickTest = function() {
-        alert('Example of infowindow with ng-click')
-      };
+
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      navigator.geolocation.getCurrentPosition(function(pos) {
+          map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+          var myLocation = new google.maps.Marker({
+              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+              map: map,
+              title: "My Location"
+          });
+      });
+
+      $scope.map = map;
+   
   });
 
+  var filter = Math.floor((Math.random() * 89) + 1);
+
+
+  $http.get('js/guiderest.json').success(function(data){ 
+    var result = $.grep(data, function(e){ return e.id == filter; });
+    $scope.restaurant = result;
+  });
 
 })
+
+
 
 
 .controller('PlaylistsCtrl', function($scope) {

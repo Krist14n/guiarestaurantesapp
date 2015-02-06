@@ -24,7 +24,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   $stateProvider
 
-
   .state('app', {
     url: "/app",
     abstract: true,
@@ -60,7 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.restaurant', {
+  .state('app.restaurant', {  
     url: "/restaurants/:restaurantId",
     views: {
       'menuContent':{
@@ -70,12 +69,32 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('app.restaurantRecomendacion', {  
+    url: "/restaurants/:restaurantId",
+    views: {
+      'menuContent':{
+        templateUrl: "templates/restaurantrecomendacion.html",
+        controller: 'RestaurantRecomendacionCtrl'
+      }
+    }
+  })
+
+
   .state('app.playlists', {
     url: "/playlists",
     views: {
       'menuContent': {
         templateUrl: "templates/playlists.html",
         controller: 'PlaylistsCtrl'
+      }
+    }
+  })
+
+  .state('app.marco',{
+    url: "/marcobeteta",
+    views: {
+      'menuContent':{
+        templateUrl : "templates/marcobeteta.html"
       }
     }
   })

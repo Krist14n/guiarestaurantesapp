@@ -13,7 +13,7 @@
 
  	<ion-content class="has-header has-subheader has-footer">
 		<ion-list>
-			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurants/{{restaurant.id}}"> 
+			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurant/{{restaurant.id}}"> 
 				<i class="icon-left icon ion-fork button-clear button-dark"></i>
 					{{restaurant.name}}
 			</ion-item>
@@ -23,16 +23,16 @@
 
 <div class="tabs-striped tabs-color-assertive">
 	<div class="tabs menu-tabs">
-	    <a class="tab-item" href="#">
+	    <a class="tab-item" href="#app/restaurantscook">
 	      Cocina
 	    </a>
-	    <a class="tab-item active" href="#">
+	    <a class="tab-item active" href="#app/restaurants">
 	      Nombre
 	    </a>
-	    <a class="tab-item" href="#">
+	    <a class="tab-item" href="#app/restaurantsplan">
 	      Plan
 	    </a>
-	    <a class="tab-item" href="#">
+	    <a class="tab-item" href="#app/restaurantszone">
 	      Zona
 	    </a>
 	</div>
