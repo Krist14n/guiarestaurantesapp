@@ -20,19 +20,19 @@
 					<div class="row">
 						<div class="col">Comida</div>
 						<div class="col">Ambiente</div>
-						<div class="col">Servicios</div>
+						<div class="col">Servicio</div>
 					</div>
 					<div class="row">
 						<div  ng-repeat="calif in r.calification track by $index" class="col">{{calif}}</div>
 					</div>
 
-				<h2>Ideal Para</h2>
+				<h2>Ideal Para:</h2>
 				<ul>
 				<p ng-repeat="ideal in r.ideal">
 					<span class="vineta">&#8226;</span> {{ ideal}}
 				</p>
 				</ul>
-				<h2>Marco Recomienda</h2>
+				<h2>Marco Recomienda:</h2>
 				<p ng-repeat="recom in r.mrecommend">
 					<span class="vineta">&#8226;</span> {{recom}}
 				</p>
@@ -51,7 +51,7 @@
 					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
 				</p>
 
-				<h2>Precio</h2>
+				<h2>Precio promedio por persona</h2>
 				<p>
 					<a>$ {{r.cost}}</a>
 				</p>
