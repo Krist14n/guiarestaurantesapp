@@ -77,3 +77,16 @@
 .restaurant-titulo{
 	background-color: transparent;
 }
+
+.logorecomendacion{
+	margin-left: 73%;
+
+}
+
+.vineta{
+color:#d42135;
+}
+
+.angular-google-map-container { 
+	height: 200px; 
+}

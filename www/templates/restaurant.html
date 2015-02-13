@@ -37,16 +37,26 @@
 					<span class="vineta">&#8226;</span> {{recom}}
 				</p>
 
-				<h2>Dirección</h2>
+				<h2>Dirección</h2>	
 
-				<div class="card"  >
-					<div  id="map" data-tap-disabled="true"></div>
+
+				<div class="angular-google-map-container">
+
+					<map center="[ {{markers.lat}} , {{markers.long}} ]">
+					  <marker
+					      position="[ {{markers.lat}}, {{markers.long}} ]"s
+					      draggable="true"
+					      visible="true">
+					  </marker>
+					</map>
+					
 				</div>
-
+				
 
 				<p ng-repeat="direccion in r.address">
 					{{direccion.branch}}
 				</p>
+
 				<p ng-repeat="tels in r.address">
 					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
 				</p>

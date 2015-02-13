@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ngCordova'])
 
-var app = angular.module('starter.controllers', ['ngCordova'])
+var app = angular.module('starter.controllers', ['ngCordova', 'ngMap'])
 
 app.run(function($cordovaSplashscreen) {
   setTimeout(function() {
@@ -50,43 +50,43 @@ app.run(function($cordovaSplashscreen) {
         })
 })
 
+
+  
+
+.controller('RestaurantsCtrl', function($scope , $stateParams, $http){
+
+        $http.get('js/guiderest.json').success(function(data){
+          $scope.restaurants = data;
+        })
+})
+
   //Single restaurant 
 .controller('RestaurantCtrl', function($scope, $stateParams, $http){
-
-  google.maps.event.addDomListener(window, 'load', function() {
-
-      var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-
-      var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-      navigator.geolocation.getCurrentPosition(function(pos) {
-          map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          var myLocation = new google.maps.Marker({
-              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-              map: map,
-              title: "My Location"
-          });
-      });
-
-      $scope.map = map;
-   
-  });
+  var result;
+  var lon;
+  var lat;
 
   var filter = $stateParams.restaurantId;  
-
   $http.get('js/guiderest.json').success(function(data){ 
-    var result = $.grep(data, function(e){ return e.id == filter; });
+    result = $.grep(data, function(e){ return e.id == filter; });
     $scope.restaurant = result;
+    
+    lon = result[0].map.longitud;
+    lat = result[0].map.latitud;
+
+    $scope.markers = { 
+      "long": lon, 
+      "lat": lat
+    }
+
+  });
+
+  $scope.$on('mapInitialized', function(event, map) {
+
+
   });
 
 })
-
 
 //Restaurant list by food 
 

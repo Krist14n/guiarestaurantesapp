@@ -1,38 +1,28 @@
-<ion-view view-title="Restaurantes" class="menu-title">
-<div class="bar bar-header">
-</div>
+<ion-view view-title="Restaurantes por Cocina" class="menu-title">
 
-<div class="bar bar-subheader has-header buscador-restaurantes">
-	<form class="form-inline ">
-			<label class=" item-input">
-				<i class="icon ion-search placeholder-icon"></i>
-				<input ng-model="query" type="text" placeholder="Buscar restaurantes" autofocus>
-			</label>
-	</form>
-</div>
 
- 	<ion-content class="has-header has-subheader has-footer">
-		<ion-list>
-			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurants/{{restaurant.id}}"> 
-				<i class="icon-left icon ion-fork button-clear button-dark"></i>
-					{{restaurant.name}}
-			</ion-item>
-		</ion-list>
-	</ion-content>
+<ion-content class="has-header has-footer">
+	<ion-list>
+		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'title' " href="#/app/restaurantcook/{{restaurant.cook}}"> 
+			<i class="button-clear button-dark"></i>
+				{{restaurant.name}}
+		</ion-item>
+	</ion-list>
+</ion-content>
 </ion-view>
 
 <div class="tabs-striped tabs-color-assertive">
 	<div class="tabs menu-tabs">
-	    <a class="tab-item" href="#/app/restaurantscook">
+	    <a class="tab-item active" href="#/app/restaurantscook">
 	      Cocina
 	    </a>
-	    <a class="tab-item active" href="#">
+	    <a class="tab-item" href="#/app/restaurants">
 	      Nombre
 	    </a>
-	    <a class="tab-item" href="#">
+	    <a class="tab-item" href="#/app/restaurantsplan">
 	      Plan
 	    </a>
-	    <a class="tab-item" href="#">
+	    <a class="tab-item" href="#/app/restaurantszone">
 	      Zona
 	    </a>
 	</div>

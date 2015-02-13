@@ -1,10 +1,19 @@
-<ion-view  view-title="Restaurantes" ng-init="init()">
+<ion-view  view-title="Guía Gourmet 2014" ng-init="init()">
 
-  <ion-content ng-repeat="r in restaurant" class="has-footer" ng-controller="RestaurantCtrl">
-
+  <ion-content ng-repeat="r in restaurant" class="has-footer">
+  		<div  class="row">
+  			<div class="col col-33"></div>
+  			<div>
+		  		<img src="img/logoMB.png" class="logorecomendacion">
+  			</div>
+  			
+  		</div>
+  		<button class="button button-block button-energized ">
+  			La Recomendación
+		</button>
 		<div class="list card">
 
-			<div class="item item-avatar">
+			<div class="item ">
 				<h2>{{r.name}}</h2>
 				<p>{{r.title}}</p>
 			</div>
@@ -20,17 +29,22 @@
 					<div class="row">
 						<div class="col">Comida</div>
 						<div class="col">Ambiente</div>
-						<div class="col">Servicios</div>
+						<div class="col">Servicio</div>
 					</div>
 					<div class="row">
-						<div  ng-repeat="calif in r.calification" class="col">{{calif}}</div>
+						<div  ng-repeat="calif in r.calification track by $index" class="col">{{calif}}</div>
 					</div>
 
-				<h2>Ideal Para</h2>
+				<h2>Ideal Para:</h2>
+				<ul>
 				<p ng-repeat="ideal in r.ideal">
-					{{ideal}}
+					<span class="vineta">&#8226;</span> {{ ideal}}
 				</p>
-
+				</ul>
+				<h2>Marco Recomienda:</h2>
+				<p ng-repeat="recom in r.mrecommend">
+					<span class="vineta">&#8226;</span> {{recom}}
+				</p>
 				<h2>Dirección</h2>
 
 				<div class="card"  >
@@ -39,13 +53,12 @@
 
 
 				<p ng-repeat="direccion in r.address">
-					{{direccion.branch}}¡
+					{{direccion.branch}}
 				</p>
 				<p ng-repeat="tels in r.address">
 					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
 				</p>
-
-				<h2>Precio</h2>
+				<h2>Precio promedio por persona</h2>
 				<p>
 					<a>$ {{r.cost}}</a>
 				</p>
