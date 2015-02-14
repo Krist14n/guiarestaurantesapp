@@ -151,8 +151,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
 
 
-
-
   .state('app.restaurantRecomendacion', {  
     url: "/restaurantRecomendacion",
     views: {
@@ -163,7 +161,15 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
     }
   })
 
-
+  .state('app.restaurantesCercanos',{
+    url: "/restaurantesCercanos",
+    views: {
+      'menuContent':{
+        templateUrl: "templates/restaurantescercanos.html",
+        controller: "RestaurantesCercanosCtrl"
+      }
+    }
+  })
 
   .state('app.marco',{
     url: "/marcobeteta",
@@ -191,6 +197,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
       }
     }
   })
+
 
   .state('app.playlists', {
     url: "/playlists",

@@ -2,37 +2,18 @@
 
   <ion-content  class="has-footer" ng-controller="RestaurantesCercanosCtrl">
 
-		<div class="list card">
-
-			<div class="item">
-				<h2>Restaurantes Cercanos</h2>
+	<map center="current-location" zoom="14">
+		<info-window id="1" position="current-location" visible="true">
+			<div ng-non-bindable="">
+				Aqui estas!
 			</div>
-
-			<div class="item item-body">
-
-				<div  class="angular-google-map-container">
-
-					<map center="current-location" zoom="14">
-						<info-window id="1" position="current-location" visible="true">
-						<div ng-non-bindable="">
-							Aqui estas!
-						</div>
-        				</info-window>
-					  <marker ng-repeat="m in markers"
-					      position="[ {{m.latitud}}, {{m.longitud}} ]"s
-					      draggable="true"
-					      visible="true">
-					  </marker>
-					</map>
-					
-				</div>
-
-			</div>
-			<div class="item tabs tabs-secondary tabs-icon-left">
-					
-			</div>
-
-		</div>
+		</info-window>
+		<marker ng-repeat="m in markers"
+			position="[ {{m.latitud}}, {{m.longitud}} ]"s
+			draggable="true"
+			visible="true">
+		</marker>
+	</map>
 
   </ion-content>
 </ion-view>

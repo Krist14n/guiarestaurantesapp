@@ -39,19 +39,18 @@
 
 				<h2>Dirección</h2>	
 
+
 				<div class="angular-google-map-container">
 
-					<map center="[19.4291754, -99.1880118]">
+					<map center="[ {{markers.lat}} , {{markers.long}} ]">
 					  <marker
-					      position="[19.4291754, -99.1880118]"
+					      position="[ {{markers.lat}}, {{markers.long}} ]"s
 					      draggable="true"
 					      visible="true">
 					  </marker>
 					</map>
 					
 				</div>
-
-					
 
 
 				<p ng-repeat="direccion in r.address">
