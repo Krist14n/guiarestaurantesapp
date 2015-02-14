@@ -144,31 +144,8 @@ app.run(function($cordovaSplashscreen) {
 
 
 .controller('RestaurantRecomendacionCtrl', function($scope, $http){
-
-  google.maps.event.addDomListener(window, 'load', function() {
-
-      var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-
-      var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-      navigator.geolocation.getCurrentPosition(function(pos) {
-          map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          var myLocation = new google.maps.Marker({
-              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-              map: map,
-              title: "My Location"
-          });
-      });
-
-      $scope.map = map;
-   
-  });
+  var lon;
+  var lat;
 
   var filter = Math.floor((Math.random() * 89) + 1);
 
@@ -176,12 +153,34 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/guiderest.json').success(function(data){ 
     var result = $.grep(data, function(e){ return e.id == filter; });
     $scope.restaurant = result;
+
+    lon = result[0].map.longitud;
+    lat = result[0].map.latitud;
+
+    $scope.markers = { 
+      "long": lon, 
+      "lat": lat
+    }
+
   });
 
 })
 
+.controller('RestaurantesCercanosCtrl', function($scope, $http){
+  var lon;
+  var lat;
+  var markers = [];
 
+  $http.get('js/guiderest.json').success(function(data){ 
 
+    for( var i = 0; i<data.length; i++ ){
+      markers.push(data[i].map)
+    }
+     $scope.markers = markers;
+    
+  });
+
+})
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
