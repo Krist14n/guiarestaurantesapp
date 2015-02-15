@@ -8,9 +8,16 @@ app.run(function($cordovaSplashscreen) {
   }, 5000)
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
   // Form data for the login modal
   $scope.loginData = {};
+
+  $scope.go = function ( path ) {
+    $location.path( path );
+  };
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {

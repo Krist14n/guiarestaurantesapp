@@ -78,10 +78,5 @@
 		"id": "16",
 		"name": "Tomar la copa",
 		"plancat": "takecup"
-	},
-	{
-		"id": "17",
-		"name": "Tomar la copa",
-		"plancat": "takecup"
-	}	
+	}
 ]
