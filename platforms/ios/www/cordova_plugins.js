@@ -29,13 +29,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
-        "id": "org.apache.cordova.inappbrowser.inappbrowser",
-        "clobbers": [
-            "window.open"
-        ]
-    },
-    {
         "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
         "id": "org.apache.cordova.geolocation.Coordinates",
         "clobbers": [
@@ -62,6 +55,13 @@ module.exports = [
         "clobbers": [
             "navigator.geolocation"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+        "id": "org.apache.cordova.inappbrowser.inappbrowser",
+        "clobbers": [
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -70,8 +70,8 @@ module.exports.metadata =
     "com.ionic.keyboard": "1.0.3",
     "org.apache.cordova.console": "0.2.12",
     "org.apache.cordova.device": "0.2.13",
-    "org.apache.cordova.inappbrowser": "0.5.5-dev",
-    "org.apache.cordova.geolocation": "0.3.12-dev"
+    "org.apache.cordova.geolocation": "0.3.12-dev",
+    "org.apache.cordova.inappbrowser": "0.5.5-dev"
 }
 // BOTTOM OF METADATA
 });
