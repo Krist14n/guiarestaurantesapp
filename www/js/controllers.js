@@ -127,7 +127,6 @@ app.run(function($cordovaSplashscreen) {
   var filter = JSON.stringify($stateParams.zoneId);
   $http.get('js/guiderest.json').success(function(data){
       var result = JSON.search(data, '//*[zone='+filter+']');
-
       $scope.restaurants = result;
   })
 
@@ -148,9 +147,7 @@ app.run(function($cordovaSplashscreen) {
   var subfilter ;
 
   $http.get('js/guiderest.json').success(function(data){
-
       var result = JSON.search(data, '//*[plancat='+filter+']');
-
       $scope.restaurants = result;
   })
 

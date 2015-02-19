@@ -1,7 +1,25 @@
 <ion-view view-title="Restaurantes por Cocina" class="menu-title">
+<div class="bar bar-subheader subheader">
+		<div class="button-bar">
+			<button class="button button-clear button-assertive" ng-click="go('/app/restaurants')">
+		  		<a href="#app/restaurants" class="menutabs">Nombre</a>
+			</button>	
+		
+			<button class="button button-clear button-assertive activado" ng-click="go('/app/restaurantscook')">
+				<a href="#app/restaurantscook" class="menutabs">Cocina</a>
+			</button>
+		
+			<button class="button button-clear button-assertive" ng-click="go('/app/restaurantsplan')">
+				<a href="#app/restaurantsplan" class="menutabs">Plan</a>
+			</button>
+		
+			<button class="button button-clear button-assertive" ng-click="go('/app/restaurantszone')">
+				<a href="#app/restaurantszone" class="menutabs">Zona</a>
+			</button>
+		</div>		
+</div>
 
-
-<ion-content class="has-header has-footer">
+<ion-content class="has-header has-subheader has-footer">
 	<ion-list>
 		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'title' " href="#/app/restaurantsinglezone/{{restaurant.id}}"> 
 			<i class="button-clear button-dark"></i>
@@ -11,20 +29,4 @@
 </ion-content>
 </ion-view>
 
-<div class="tabs-striped tabs-color-assertive">
-	<div class="tabs menu-tabs">
-	    <a class="tab-item active" href="#/app/restaurantscook">
-	      Cocina
-	    </a>
-	    <a class="tab-item" href="#/app/restaurants">
-	      Nombre
-	    </a>
-	    <a class="tab-item" href="#/app/restaurantsplan">
-	      Plan
-	    </a>
-	    <a class="tab-item" href="#/app/restaurantszone">
-	      Zona
-	    </a>
-	</div>
-</div>
  

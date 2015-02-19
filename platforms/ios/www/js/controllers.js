@@ -8,9 +8,16 @@ app.run(function($cordovaSplashscreen) {
   }, 5000)
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
   // Form data for the login modal
   $scope.loginData = {};
+
+  $scope.go = function ( path ) {
+    $location.path( path );
+  };
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -116,9 +123,10 @@ app.run(function($cordovaSplashscreen) {
 
 //Internal Restaurant list by zone 
 .controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http){
-  var filter = $stateParams;
+
+  var filter = JSON.stringify($stateParams.zoneId);
   $http.get('js/guiderest.json').success(function(data){
-      var result = $.grep(data, function(e){ return e.zone == filter.zoneId; });
+      var result = JSON.search(data, '//*[zone='+filter+']');
       $scope.restaurants = result;
   })
 
@@ -134,9 +142,12 @@ app.run(function($cordovaSplashscreen) {
 
 //Internal Restaurant list by plan 
 .controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http){
-  var filter = $stateParams;
+
+  var filter = JSON.stringify($stateParams.planId);
+  var subfilter ;
+
   $http.get('js/guiderest.json').success(function(data){
-      var result = $.grep(data, function(e){ return e.plancat == filter.planId; });
+      var result = JSON.search(data, '//*[plancat='+filter+']');
       $scope.restaurants = result;
   })
 
