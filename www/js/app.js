@@ -20,8 +20,9 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
+  $ionicConfigProvider.backButton.text(' ').icon('ion-ios7-arrow-left');
   $stateProvider
 
   .state('app', {
@@ -45,6 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
   .state('app.restaurant', {  
     url: "/restaurant/:restaurantId",
+    cache: false,
     views: {
       'menuContent':{
         templateUrl: "templates/restaurant.html",
@@ -57,6 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
   .state('app.restaurantscook', {
     url: "/restaurantscook",
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: "templates/restaurantscook.html",
@@ -89,6 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
   .state('app.restaurantszone', {
     url: "/restaurantszone",
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: "templates/restaurantszone.html",
@@ -121,6 +125,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
   .state('app.restaurantsplan', {
     url: "/restaurantsplan",
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: "templates/restaurantsplan.html",
