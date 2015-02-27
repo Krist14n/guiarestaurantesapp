@@ -10,7 +10,7 @@
 			</button>
 		
 			<button class="button button-clear button-assertive activado" ng-click="go('/app/restaurantsplan')">
-				<a href="#app/restaurantsplan" class="menutabs">Planss</a>
+				<a href="#app/restaurantsplan" class="menutabs">Plan</a>
 			</button>
 		
 			<button class="button button-clear button-assertive" ng-click="go('/app/restaurantszone')">
@@ -22,8 +22,8 @@
 <ion-content class="has-header has-subheader has-footer">
 	<ion-list>
 		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'title' " href="#/app/restaurantsinglezone/{{restaurant.id}}"> 
-			<i class="icon-left icon {{restaurant.icon}} button-clear button-dark"></i>
-				{{restaurant.icon}}
+			<i class="button-clear button-dark"></i>
+				{{restaurant.name}}
 		</ion-item>
 	</ion-list>
 </ion-content>
