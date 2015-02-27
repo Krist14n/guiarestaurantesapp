@@ -5564,6 +5564,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
 
     // Stop deceleration
     if (self.__isDecelerating) {
+      try{ ionic.Gestures.detection.stopDetect();}catch(e){}
       zyngaCore.effect.Animate.stop(self.__isDecelerating);
       self.__isDecelerating = false;
       self.__interruptedAnimation = true;

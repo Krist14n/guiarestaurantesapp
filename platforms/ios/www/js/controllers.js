@@ -9,8 +9,6 @@ app.run(function($cordovaSplashscreen) {
 })
 
 
-
-
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
   // Form data for the login modal
   $scope.loginData = {};
@@ -50,25 +48,18 @@ app.run(function($cordovaSplashscreen) {
 
   //Restaurant List from .json
 
-.controller('RestaurantsCtrl', function($scope , $stateParams, $http){
+
+.controller('RestaurantsCtrl', function($scope , $stateParams, $http, $ionicNavBarDelegate){
 
         $http.get('js/guiderest.json').success(function(data){
           $scope.restaurants = data;
         })
-})
 
-
-  
-
-.controller('RestaurantsCtrl', function($scope , $stateParams, $http){
-
-        $http.get('js/guiderest.json').success(function(data){
-          $scope.restaurants = data;
-        })
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
   //Single restaurant 
-.controller('RestaurantCtrl', function($scope, $stateParams, $http){
+.controller('RestaurantCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
   var result;
   var lon;
   var lat;
@@ -85,7 +76,7 @@ app.run(function($cordovaSplashscreen) {
       "long": lon, 
       "lat": lat
     }
-
+    $ionicNavBarDelegate.showBackButton(true);
   });
 
   $scope.$on('mapInitialized', function(event, map) {
@@ -97,51 +88,55 @@ app.run(function($cordovaSplashscreen) {
 
 //Restaurant list by food 
 
-.controller('RestaurantsByCookCtrl', function($scope, $http){
+.controller('RestaurantsByCookCtrl', function($scope, $http, $ionicNavBarDelegate){
   $http.get('js/tipos_comida.json').success(function(data){
       $scope.restaurants = data;
   })
+  $ionicNavBarDelegate.showBackButton(false)
 })
 
 //Internal Restaurant list by food 
-.controller('RestaurantsListByCookCtrl', function($scope, $stateParams, $http){
+.controller('RestaurantsListByCookCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
   var filter = $stateParams;
   $http.get('js/guiderest.json').success(function(data){
       var result = $.grep(data, function(e){ return e.cook == filter.cookId; });
       $scope.restaurants = result;
   })
+  $ionicNavBarDelegate.showBackButton(true);
 
 })
 
 //Restaurant list by zone 
 
-.controller('RestaurantsByZoneCtrl', function($scope, $http){
+.controller('RestaurantsByZoneCtrl', function($scope, $http, $ionicNavBarDelegate){
   $http.get('js/por_zona.json').success(function(data){
       $scope.restaurants = data;
   })
+  $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Internal Restaurant list by zone 
-.controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http){
+.controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
 
   var filter = JSON.stringify($stateParams.zoneId);
   $http.get('js/guiderest.json').success(function(data){
       var result = JSON.search(data, '//*[zone='+filter+']');
       $scope.restaurants = result;
   })
-
+  $ionicNavBarDelegate.showBackButton(true);
 })
 
 //Restaurant list by plan 
 
-.controller('RestaurantsByPlanCtrl', function($scope, $http){
+.controller('RestaurantsByPlanCtrl', function($scope, $http, $ionicNavBarDelegate){
   $http.get('js/por_plan.json').success(function(data){
       $scope.restaurants = data;
   })
+  $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Internal Restaurant list by plan 
-.controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http){
+.controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
 
   var filter = JSON.stringify($stateParams.planId);
   var subfilter ;
@@ -150,6 +145,7 @@ app.run(function($cordovaSplashscreen) {
       var result = JSON.search(data, '//*[plancat='+filter+']');
       $scope.restaurants = result;
   })
+  $ionicNavBarDelegate.showBackButton(true);
 
 })
 

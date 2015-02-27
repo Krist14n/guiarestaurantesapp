@@ -28,7 +28,7 @@
 
 	<ion-content class="has-header has-subheader has-footer lista-restaurantes" has-tabs="true">
 		<ion-list>
-			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " ng-click="go('/app/restaurant/{{restaurant.id}}')"> 
+			<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " ng-click="go('/app/restaurant/{{restaurant.id}}')" on-tap="onRelease()"> 
 				<i class="icon-left icon ion-fork button-clear button-dark"></i>
 					{{restaurant.name}}
 			</ion-item>
