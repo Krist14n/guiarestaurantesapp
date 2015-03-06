@@ -70,6 +70,11 @@
 				<p>
 					<a>$ {{r.cost}}</a>
 				</p>
+
+				<h2 ng-show="{{r.promo !== 'null'}}" >Promociones Banorte</h2>
+				<p>
+					<a ng-show ="{{r.promo !== 'null'}}" class="promocion">{{r.promo}}</a>
+				</p>
 			</div>
 
 			<div class="item tabs tabs-secondary tabs-icon-left">
