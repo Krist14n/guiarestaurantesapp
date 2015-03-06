@@ -123,3 +123,18 @@ color:#d42135;
 ion-nav-back-button{
 	color: #FFFFFF;
 }
+
+.card, .list-inset{
+	margin: 20px -9px!important;
+}
+map{
+	
+	height: 100%;	
+}
+.has-map{
+	height: 100%;
+}
+
+.promocion{
+	color:#d42135!important;
+}

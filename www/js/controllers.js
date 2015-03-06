@@ -13,142 +13,11 @@ app.run(function($cordovaSplashscreen) {
   // Form data for the login modal
   $scope.loginData = {};
 
-  $scope.go = function ( path ) {
-    $location.path( path );
+  $scope.goMenu = function ( path ) {
+        $location.path( path );
   };
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+  
 })
-
-  //Restaurant List from .json
-
-
-.controller('RestaurantsCtrl', function($scope , $stateParams, $http, $ionicNavBarDelegate){
-
-        $http.get('js/guiderest.json').success(function(data){
-          $scope.restaurants = data;
-        })
-
-    $ionicNavBarDelegate.showBackButton(false);
-})
-
-  //Single restaurant 
-.controller('RestaurantCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
-  var result;
-  var lon;
-  var lat;
-
-  var filter = $stateParams.restaurantId;  
-  $http.get('js/guiderest.json').success(function(data){ 
-    result = $.grep(data, function(e){ return e.id == filter; });
-    $scope.restaurant = result;
-    
-    lon = result[0].map.longitud;
-    lat = result[0].map.latitud;
-
-    $scope.markers = { 
-      "long": lon, 
-      "lat": lat
-    }
-    $ionicNavBarDelegate.showBackButton(true);
-  });
-
-  $scope.$on('mapInitialized', function(event, map) {
-
-
-  });
-
-})
-
-//Restaurant list by food 
-
-.controller('RestaurantsByCookCtrl', function($scope, $http, $ionicNavBarDelegate){
-  $http.get('js/tipos_comida.json').success(function(data){
-      $scope.restaurants = data;
-  })
-  $ionicNavBarDelegate.showBackButton(false)
-})
-
-//Internal Restaurant list by food 
-.controller('RestaurantsListByCookCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
-  var filter = $stateParams;
-  $http.get('js/guiderest.json').success(function(data){
-      var result = $.grep(data, function(e){ return e.cook == filter.cookId; });
-      $scope.restaurants = result;
-  })
-  $ionicNavBarDelegate.showBackButton(true);
-
-})
-
-//Restaurant list by zone 
-
-.controller('RestaurantsByZoneCtrl', function($scope, $http, $ionicNavBarDelegate){
-  $http.get('js/por_zona.json').success(function(data){
-      $scope.restaurants = data;
-  })
-  $ionicNavBarDelegate.showBackButton(false);
-})
-
-//Internal Restaurant list by zone 
-.controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
-
-  var filter = JSON.stringify($stateParams.zoneId);
-  $http.get('js/guiderest.json').success(function(data){
-      var result = JSON.search(data, '//*[zone='+filter+']');
-      $scope.restaurants = result;
-  })
-  $ionicNavBarDelegate.showBackButton(true);
-})
-
-//Restaurant list by plan 
-
-.controller('RestaurantsByPlanCtrl', function($scope, $http, $ionicNavBarDelegate){
-  $http.get('js/por_plan.json').success(function(data){
-      $scope.restaurants = data;
-  })
-  $ionicNavBarDelegate.showBackButton(false);
-})
-
-//Internal Restaurant list by plan 
-.controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
-
-  var filter = JSON.stringify($stateParams.planId);
-  var subfilter ;
-
-  $http.get('js/guiderest.json').success(function(data){
-      var result = JSON.search(data, '//*[plancat='+filter+']');
-      $scope.restaurants = result;
-  })
-  $ionicNavBarDelegate.showBackButton(true);
-
-})
-
 
 .controller('RestaurantRecomendacionCtrl', function($scope, $http){
   var lon;
@@ -173,6 +42,428 @@ app.run(function($cordovaSplashscreen) {
 
 })
 
+  //Restaurant List from .json
+
+
+.controller('RestaurantsCtrl', function($scope , $stateParams, $http, $ionicNavBarDelegate, $location){
+
+    $http.get('js/guiderest.json').success(function(data){
+      $scope.restaurants = data;
+    })
+
+    $scope.lastScrolling = new Date().getTime();
+
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
+
+})
+
+  //Single restaurant 
+.controller('RestaurantCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
+  var result;
+  var lon;
+  var lat;
+
+  var filter = $stateParams.restaurantId;  
+  $http.get('js/guiderest.json').success(function(data){ 
+    result = $.grep(data, function(e){ return e.id == filter; });
+    $scope.restaurant = result;
+    
+    lon = result[0].map.longitud;
+    lat = result[0].map.latitud;
+
+    $scope.markers = { 
+      "long": lon, 
+      "lat": lat
+    }
+
+    $scope.promo="";
+    $ionicNavBarDelegate.showBackButton(true);
+  });
+
+  $scope.$on('mapInitialized', function(event, map) {
+
+
+  });
+
+})
+
+//Restaurant list by food 
+
+.controller('RestaurantsByCookCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/tipos_comida.json').success(function(data){
+      $scope.restaurants = data;
+  })
+  $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+
+  $ionicNavBarDelegate.showBackButton(false)
+})
+
+//Internal Restaurant list by food 
+.controller('RestaurantsListByCookCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
+  var filter = $stateParams;
+  $http.get('js/guiderest.json').success(function(data){
+      var result = $.grep(data, function(e){ return e.cook == filter.cookId; });
+      $scope.restaurants = result;
+  })
+  $ionicNavBarDelegate.showBackButton(true);
+
+})
+
+//Restaurant list by zone 
+
+.controller('RestaurantsByZoneCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/por_zona.json').success(function(data){
+      $scope.restaurants = data;
+  })
+  $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 400) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(false);
+})
+
+//Internal Restaurant list by zone 
+.controller('RestaurantsListByZoneCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
+
+  var filter = JSON.stringify($stateParams.zoneId);
+  $http.get('js/guiderest.json').success(function(data){
+      var result = JSON.search(data, '//*[zone='+filter+']');
+      $scope.restaurants = result;
+  })
+  $ionicNavBarDelegate.showBackButton(true);
+})
+
+//Restaurant list by plan 
+
+.controller('RestaurantsByPlanCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/por_plan.json').success(function(data){
+      $scope.restaurants = data;
+  })
+  $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 400) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(false);
+})
+
+//Internal Restaurant list by plan 
+.controller('RestaurantsListByPlanCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
+
+  var filter = JSON.stringify($stateParams.planId);
+  var subfilter ;
+
+  $http.get('js/guiderest.json').success(function(data){
+      var result = JSON.search(data, '//*[plancat='+filter+']');
+      $scope.restaurants = result;
+  })
+  $ionicNavBarDelegate.showBackButton(true);
+
+})
+
+// Restaurantes Banorte
+.controller('RestaurantsBanorteCtrl', function($scope , $stateParams, $http, $ionicNavBarDelegate, $location){
+
+    $http.get('js/guiderest.json').success(function(data){
+      var result = JSON.search(data, '//*[promo!="null"]')
+      $scope.restaurants = result;
+    })
+
+    $scope.lastScrolling = new Date().getTime();
+
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 400) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
+
+})  
+
+//Restaurantes Banorte por Cocina
+
+.controller('RestaurantsByCookBanorteCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/tipos_comida.json').success(function(data){
+      $scope.restaurants = data;
+  })
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 150) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+
+  $ionicNavBarDelegate.showBackButton(false)
+})
+
+.controller('RestaurantsListByCookBanorteCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
+  var filter = $stateParams;
+  $http.get('js/guiderest.json').success(function(data){
+
+      var result = $.grep(data, function(e){ return e.cook == filter.cookId; });
+
+      var result2 = JSON.search(result, '//*[promo!="null"]');
+
+      $scope.restaurants = result2;
+  })
+  $ionicNavBarDelegate.showBackButton(true);
+
+})
+
+//Restaurantes Banorte por zona 
+
+.controller('RestaurantsByZoneBanorteCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/por_zona.json').success(function(data){
+      $scope.restaurants = data;
+  })
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(false);
+})
+
+//Restaurantes Banorte Lista por Zona 
+
+.controller('RestaurantsListByZoneBanorteCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate, $location){
+
+  var filter = JSON.stringify($stateParams.zoneId);
+  $http.get('js/guiderest.json').success(function(data){
+
+      var result = JSON.search(data, '//*[zone='+filter+']');
+
+      var result2 = JSON.search(result, '//*[promo!="null"]');
+
+      $scope.restaurants = result2;
+  })
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(true);
+})
+
+
+//Restaurantes Banorte por plan
+
+.controller('RestaurantsByPlanBanorteCtrl', function($scope, $http, $ionicNavBarDelegate, $location){
+  $http.get('js/por_plan.json').success(function(data){
+      $scope.restaurants = data;
+  })
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(false);
+})
+
+//Restaurantes Banorte Lista por Plan 
+
+.controller('RestaurantsListByPlanBanorteCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate, $location){
+
+  var filter = JSON.stringify($stateParams.planId);
+  $http.get('js/guiderest.json').success(function(data){
+
+      var result = JSON.search(data, '//*[plancat='+filter+']');
+      console.log(filter)
+      var result2 = JSON.search(result, '//*[promo!="null"]');
+
+      $scope.restaurants = result2;
+  })
+    $scope.scrollList = function() {
+      var dat = new Date().getTime();
+      $scope.lastScrolling = new Date().getTime();
+    };
+
+    $scope.canClickInList = function() {
+      var diff =  new Date().getTime() - $scope.lastScrolling;
+      if (diff > 200) {
+          return true;
+      } else {
+          return false;
+      }
+    };
+
+    $scope.go = function ( path ) {
+      if ($scope.canClickInList()) {
+        $location.path( path );
+      }
+    };
+    $scope.goMenu = function ( path ) {
+        $location.path( path );
+    };
+  $ionicNavBarDelegate.showBackButton(true);
+})
+
 .controller('RestaurantesCercanosCtrl', function($scope, $http){
   var lon;
   var lat;
@@ -189,17 +480,6 @@ app.run(function($cordovaSplashscreen) {
 
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-  
 .controller('PlaylistCtrl', function($scope, $stateParams) {
   $scope.playlistId = $stateParams.playlistId;
 });

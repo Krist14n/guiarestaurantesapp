@@ -1138,7 +1138,7 @@ window.ionic.version = '1.0.0-beta.14';
      * also used for cloning when dest is an empty object
      * @param   {Object}    dest
      * @param   {Object}    src
-     * @param	{Boolean}	merge		do a merge
+     * @param {Boolean} merge   do a merge
      * @returns {Object}    dest
      */
     extend: function extend(dest, src, merge) {
@@ -1615,8 +1615,8 @@ window.ionic.version = '1.0.0-beta.14';
     name: 'hold',
     index: 10,
     defaults: {
-      hold_timeout	: 500,
-      hold_threshold	: 1
+      hold_timeout  : 500,
+      hold_threshold  : 1
     },
     timer: null,
     handler: function holdGesture(ev, inst) {
@@ -1662,11 +1662,11 @@ window.ionic.version = '1.0.0-beta.14';
     name: 'tap',
     index: 100,
     defaults: {
-      tap_max_touchtime	: 250,
-      tap_max_distance	: 10,
-      tap_always			: true,
-      doubletap_distance	: 20,
-      doubletap_interval	: 300
+      tap_max_touchtime : 250,
+      tap_max_distance  : 10,
+      tap_always      : true,
+      doubletap_distance  : 20,
+      doubletap_interval  : 300
     },
     handler: function tapGesture(ev, inst) {
       if(ev.eventType == ionic.Gestures.EVENT_END && ev.srcEvent.type != 'touchcancel') {
@@ -4257,6 +4257,12 @@ ionic.views.Scroll = ionic.views.View.inherit({
       /** duration for animations triggered by scrollTo/zoomTo */
       animationDuration: 250,
 
+      /** The velocity required to make the scroll view "slide" after touchend */
+      decelVelocityThreshold: 4,
+
+      /** The velocity required to make the scroll view "slide" after touchend when using paging */
+      decelVelocityThresholdPaging: 4,
+
       /** Enable bouncing (content can be slowly moved outside and jumps back after releasing) */
       bouncing: true,
 
@@ -4299,6 +4305,8 @@ ionic.views.Scroll = ionic.views.View.inherit({
 
       // The ms interval for triggering scroll events
       scrollEventInterval: 10,
+
+      freeze: false,
 
       getContentWidth: function() {
         return Math.max(self.__content.scrollWidth, self.__content.offsetWidth);
@@ -4665,7 +4673,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
     };
 
     self.touchMove = function(e) {
-      if (!self.__isDown ||
+      if (self.options.freeze || !self.__isDown ||
         (!self.__isDown && e.defaultPrevented) ||
         (e.target.tagName === 'TEXTAREA' && e.target.parentElement.querySelector(':focus')) ) {
         return;
@@ -4714,7 +4722,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
     self.touchEnd = function(e) {
       if (!self.__isDown) return;
 
-      self.doTouchEnd(e.timeStamp);
+      self.doTouchEnd(e, e.timeStamp);
       self.__isDown = false;
       self.__hasStarted = false;
       self.__isSelectable = true;
@@ -4766,7 +4774,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
       };
 
       self.mouseMove = function(e) {
-        if (!mousedown || (!mousedown && e.defaultPrevented)) {
+        if (self.options.freeze || !mousedown || (!mousedown && e.defaultPrevented)) {
           return;
         }
 
@@ -4786,7 +4794,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
           return;
         }
 
-        self.doTouchEnd(e.timeStamp);
+        self.doTouchEnd(e, e.timeStamp);
 
         mousedown = false;
       };
@@ -4858,13 +4866,13 @@ ionic.views.Scroll = ionic.views.View.inherit({
     delete self.__indicatorY;
     delete self.options.el;
 
-    self.__callback = self.scrollChildIntoView = self.resetScrollView = angular.noop;
+    self.__callback = self.scrollChildIntoView = self.resetScrollView = NOOP;
 
     self.mouseMove = self.mouseDown = self.mouseUp = self.mouseWheel =
-      self.touchStart = self.touchMove = self.touchEnd = self.touchCancel = angular.noop;
+      self.touchStart = self.touchMove = self.touchEnd = self.touchCancel = NOOP;
 
     self.resize = self.scrollTo = self.zoomTo =
-      self.__scrollingComplete = angular.noop;
+      self.__scrollingComplete = NOOP;
     container = null;
   },
 
@@ -5265,17 +5273,18 @@ ionic.views.Scroll = ionic.views.View.inherit({
    * @param showCallback {Function} Callback to execute when the refresher should be shown. This is for showing the refresher during a negative scrollTop.
    * @param hideCallback {Function} Callback to execute when the refresher should be hidden. This is for hiding the refresher when it's behind the nav bar.
    * @param tailCallback {Function} Callback to execute just before the refresher returns to it's original state. This is for zooming out the refresher.
+   * @param pullProgressCallback Callback to state the progress while pulling to refresh
    */
-  activatePullToRefresh: function(height, activateCallback, deactivateCallback, startCallback, showCallback, hideCallback, tailCallback) {
+  activatePullToRefresh: function(height, refresherMethods) {
     var self = this;
 
     self.__refreshHeight = height;
-    self.__refreshActivate = function(){ionic.requestAnimationFrame(activateCallback);};
-    self.__refreshDeactivate = function(){ionic.requestAnimationFrame(deactivateCallback);};
-    self.__refreshStart = function(){ionic.requestAnimationFrame(startCallback);};
-    self.__refreshShow = function(){ionic.requestAnimationFrame(showCallback);};
-    self.__refreshHide = function(){ionic.requestAnimationFrame(hideCallback);};
-    self.__refreshTail = function(){ionic.requestAnimationFrame(tailCallback);};
+    self.__refreshActivate = function() {ionic.requestAnimationFrame(refresherMethods.activate);};
+    self.__refreshDeactivate = function() {ionic.requestAnimationFrame(refresherMethods.deactivate);};
+    self.__refreshStart = function() {ionic.requestAnimationFrame(refresherMethods.start);};
+    self.__refreshShow = function() {ionic.requestAnimationFrame(refresherMethods.show);};
+    self.__refreshHide = function() {ionic.requestAnimationFrame(refresherMethods.hide);};
+    self.__refreshTail = function() {ionic.requestAnimationFrame(refresherMethods.tail);};
     self.__refreshTailTime = 100;
     self.__minSpinTime = 600;
   },
@@ -5306,19 +5315,19 @@ ionic.views.Scroll = ionic.views.View.inherit({
     // delay to make sure the spinner has a chance to spin for a split second before it's dismissed
     var d = new Date();
     var delay = 0;
-    if (self.refreshStartTime + self.__minSpinTime > d.getTime()){
+    if (self.refreshStartTime + self.__minSpinTime > d.getTime()) {
       delay = self.refreshStartTime + self.__minSpinTime - d.getTime();
     }
-    setTimeout(function(){
-      if (self.__refreshTail){
+    setTimeout(function() {
+      if (self.__refreshTail) {
         self.__refreshTail();
       }
-      setTimeout(function(){
+      setTimeout(function() {
         self.__refreshActive = false;
         if (self.__refreshDeactivate) {
           self.__refreshDeactivate();
         }
-        if (self.__refreshHide){
+        if (self.__refreshHide) {
           self.__refreshHide();
         }
 
@@ -5548,7 +5557,11 @@ ionic.views.Scroll = ionic.views.View.inherit({
    * Touch start handler for scrolling support
    */
   doTouchStart: function(touches, timeStamp) {
+    try{ ionic.Gestures.detection.stopDetect();}catch(e){}
     var self = this;
+
+    // remember if the deceleration was just stopped
+    self.__decStopped = !!(self.__isDecelerating || self.__isAnimating);
 
     self.hintResize();
 
@@ -5667,6 +5680,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
 
     // Are we already is dragging mode?
     if (self.__isDragging) {
+        self.__decStopped = false;
 
       // Compute move distance
       var moveX = currentTouchLeft - self.__lastTouchLeft;
@@ -5746,7 +5760,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
             if (!self.__enableScrollX && self.__refreshHeight != null) {
 
               // hide the refresher when it's behind the header bar in case of header transparency
-              if (scrollTop < 0){
+              if (scrollTop < 0) {
                 self.__refreshHidden = false;
                 self.__refreshShow();
               } else {
@@ -5780,7 +5794,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
             scrollTop = 0;
 
           }
-        } else if (self.__refreshHeight && !self.__refreshHidden){
+        } else if (self.__refreshHeight && !self.__refreshHidden) {
           // if a positive scroll value and the refresher is still not hidden, hide it
           self.__refreshHide();
           self.__refreshHidden = true;
@@ -5832,7 +5846,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
   /**
    * Touch end handler for scrolling support
    */
-  doTouchEnd: function(timeStamp) {
+  doTouchEnd: function(e, timeStamp) {
     if (timeStamp instanceof Date) {
       timeStamp = timeStamp.valueOf();
     }
@@ -5886,7 +5900,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
           self.__decelerationVelocityY = movedTop / timeOffset * (1000 / 60);
 
           // How much velocity is required to start the deceleration
-          var minVelocityToStartDeceleration = self.options.paging || self.options.snapping ? 4 : 1;
+          var minVelocityToStartDeceleration = self.options.paging || self.options.snapping ? self.options.decelVelocityThresholdPaging : self.options.decelVelocityThreshold;
 
           // Verify that we have enough velocity to start deceleration
           if (Math.abs(self.__decelerationVelocityX) > minVelocityToStartDeceleration || Math.abs(self.__decelerationVelocityY) > minVelocityToStartDeceleration) {
@@ -5902,6 +5916,13 @@ ionic.views.Scroll = ionic.views.View.inherit({
       } else if ((timeStamp - self.__lastTouchMove) > 100) {
         self.__scrollingComplete();
       }
+
+    } else if (self.__decStopped) {
+      // the deceleration was stopped
+      // user flicked the scroll fast, and stop dragging, then did a touchstart to stop the srolling
+      // tell the touchend event code to do nothing, we don't want to actually send a click
+      e.isTapHandled = true;
+      self.__decStopped = false;
     }
 
     // If this was a slower move it is per default non decelerated, but this
@@ -6118,7 +6139,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
       self.__minDecelerationScrollTop = 0;
       self.__maxDecelerationScrollLeft = self.__maxScrollLeft;
       self.__maxDecelerationScrollTop = self.__maxScrollTop;
-      if (self.__refreshActive) self.__minDecelerationScrollTop = self.__refreshHeight *-1;
+      if (self.__refreshActive) self.__minDecelerationScrollTop = self.__refreshHeight * -1;
     }
 
     // Wrap class method
@@ -6306,7 +6327,6 @@ ionic.views.Scroll = ionic.views.View.inherit({
     y = touch2.pageY - touch1.pageY;
     return Math.sqrt((x*x) + (y*y));
   },
-
 
   /**
    * calculate the scale factor between two touchLists (fingers)
@@ -52358,6 +52378,7 @@ function($ionicGesture, $timeout) {
  * either an individual view basis, or by global configuration. Please see the
  * _Caching_ section in {@link ionic.directive:ionNavView} for more info.
  *
+
  * @param {string=} view-title A text-only title to display on the parent {@link ionic.directive:ionNavBar}.
  * For an HTML title, such as an image, see {@link ionic.directive:ionNavTitle} instead.
  * @param {boolean=} cache-view If this view should be allowed to be cached or not.
@@ -52367,6 +52388,7 @@ function($ionicGesture, $timeout) {
  * {@link ionic.directive:ionNavBar} by default.
  * @param {boolean=} hide-nav-bar Whether to hide the parent
  * {@link ionic.directive:ionNavBar} by default.
+ 
  */
 IonicModule
 .directive('ionView', function() {

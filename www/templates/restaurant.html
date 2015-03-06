@@ -11,7 +11,7 @@
 
 			<div class="item item-body">
 
-				<img class="full-image"  src="./img/fotos_restaurantes/{{r.img}}.jpg">
+				<img class="full-image"  ng-src="./img/fotos_restaurantes/{{r.img}}.jpg">
 				<p>
 				  {{r.review}}
 				</p>
@@ -45,7 +45,6 @@
 					<map center="[ {{markers.lat}} , {{markers.long}} ]">
 					  <marker
 					      position="[ {{markers.lat}}, {{markers.long}} ]"s
-					      draggable="true"
 					      visible="true">
 					  </marker>
 					</map>
@@ -64,6 +63,11 @@
 				<h2>Precio promedio por persona</h2>
 				<p>
 					<a>$ {{r.cost}}</a>
+				</p>
+
+				<h2 ng-show="{{r.promo !== 'null'}}" >Promociones Banorte</h2>
+				<p>
+					<a ng-show ="{{r.promo !== 'null'}}" class="promocion">{{r.promo}}</a>
 				</p>
 			</div>
 

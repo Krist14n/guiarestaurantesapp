@@ -78,16 +78,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
     }
   })
 
-  .state('app.restaurantsinglecook', {  
-    url: "/restaurantsinglecook/:restaurantId",
-    views: {
-      'menuContent':{
-        templateUrl: "templates/restaurant.html",
-        controller: 'RestaurantCtrl'
-      }
-    }
-  })
-
   // por zona
 
   .state('app.restaurantszone', {
@@ -107,16 +97,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
       'menuContent': {
         templateUrl: "templates/restaurantszonelist.html",
         controller: 'RestaurantsListByZoneCtrl'
-      }
-    }
-  })
-
-  .state('app.restaurantsinglezone', {  
-    url: "/restaurantsinglezone/:restaurantId",
-    views: {
-      'menuContent':{
-        templateUrl: "templates/restaurant.html",
-        controller: 'RestaurantCtrl'
       }
     }
   })
@@ -144,15 +124,93 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
     }
   })
 
-  .state('app.restaurantsingleplan', {  
-    url: "/restaurantsinglezone/:restaurantId",
+  // todos los restaurantes promocion banorte
+
+  .state('app.restaurantsbanorte', {
+    url: "/restaurantsbanorte",
     views: {
-      'menuContent':{
-        templateUrl: "templates/restaurant.html",
-        controller: 'RestaurantCtrl'
+      'menuContent': {
+        templateUrl: "templates/restaurantsbanorte.html",
+        controller: 'RestaurantsBanorteCtrl'
       }
     }
   })
+
+  // todos los restaurantes promocion banorte por cocina
+
+  .state('app.restaurantscookbanorte', {
+    url: "/restaurantscookbanorte",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantscookbanorte.html",
+        controller: 'RestaurantsByCookBanorteCtrl'
+      }
+    }
+  })
+
+  .state('app.restaurantcookbanorte', {
+    url: "/restaurantcookbanorte/:cookId",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantscooklistbanorte.html",
+        controller: 'RestaurantsListByCookBanorteCtrl'
+      }
+    }
+  })
+
+
+  // todos los restaurantes promocion banorte por zona
+
+  .state('app.restaurantszonebanorte', {
+    url: "/restaurantszonebanorte",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantszonebanorte.html",
+        controller: 'RestaurantsByZoneBanorteCtrl'
+      }
+    }
+  })
+
+  .state('app.restaurantzonebanorte', {
+    url: "/restaurantzonebanorte/:zoneId",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantszonelist.html",
+        controller: 'RestaurantsListByZoneBanorteCtrl'
+      }
+    }
+  })
+
+
+
+  // todos los restaurantes promocion banorte por plan
+
+  .state('app.restaurantsplanbanorte', {
+    url: "/restaurantsplanbanorte",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantsplanbanorte.html",
+        controller: 'RestaurantsByPlanBanorteCtrl'
+      }
+    }
+  })
+
+  .state('app.restaurantplanbanorte', {
+    url: "/restaurantplanbanorte/:planId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/restaurantplanlistbanorte.html",
+        controller: 'RestaurantsListByPlanBanorteCtrl'
+      }
+    }
+  })
+
+
 
 
 
