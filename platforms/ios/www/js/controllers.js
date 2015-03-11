@@ -88,8 +88,11 @@ app.run(function($cordovaSplashscreen) {
   var lat;
 
   var filter = $stateParams.restaurantId;  
+
   $http.get('js/guiderest.json').success(function(data){ 
+
     result = $.grep(data, function(e){ return e.id == filter; });
+
     $scope.restaurant = result;
     
     lon = result[0].map.longitud;
@@ -468,14 +471,19 @@ app.run(function($cordovaSplashscreen) {
   var lon;
   var lat;
   var markers = [];
+  var markers2 = [];
 
   $http.get('js/guiderest.json').success(function(data){ 
 
+    var markers2 = JSON.search(data, '//*[id]');
+
     for( var i = 0; i<data.length; i++ ){
-      markers.push(data[i].map)
+      markers.push(data[i].map);
+      markers.push(data[i].id);
+      markers.push(data[i].name);
     }
-     $scope.markers = markers;
-    
+    $scope.markers = markers;
+      
   });
 
 })

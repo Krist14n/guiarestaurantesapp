@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
-  $ionicConfigProvider.backButton.text(' ').icon('ion-ios7-arrow-left');
+  $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left').previousTitleText(false);;
   $stateProvider
 
   .state('app', {
