@@ -1,6 +1,6 @@
-angular.module('starter.controllers', ['ngCordova'])
+angular.module('starter.controllers', ['ngCordova','ngMap'])
 
-var app = angular.module('starter.controllers', ['ngCordova', 'ngMap'])
+var app = angular.module('starter.controllers', ['ngCordova','ngMap'])
 
 app.run(function($cordovaSplashscreen) {
   setTimeout(function() {
@@ -23,7 +23,7 @@ app.run(function($cordovaSplashscreen) {
   var lon;
   var lat;
 
-  var filter = Math.floor((Math.random() * 89) + 1);
+  var filter = Math.floor((Math.random() * 128) + 1);
 
 
   $http.get('js/guiderest.json').success(function(data){ 
@@ -467,6 +467,7 @@ app.run(function($cordovaSplashscreen) {
   $ionicNavBarDelegate.showBackButton(true);
 })
 
+
 .controller('RestaurantesCercanosCtrl', function($scope, $http){
   var lon;
   var lat;
@@ -479,12 +480,18 @@ app.run(function($cordovaSplashscreen) {
 
     for( var i = 0; i<data.length; i++ ){
       markers.push(data[i].map);
-      markers.push(data[i].id);
-      markers.push(data[i].name);
+      //markers.push(data[i].id);
+      //markers.push(data[i].name);
     }
+
+    
     $scope.markers = markers;
       
   });
+
+  function showInfoWindow(){
+    console.log(test);
+  }
 
 })
 

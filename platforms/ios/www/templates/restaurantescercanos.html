@@ -1,22 +1,24 @@
 <ion-view  view-title="Restaurantes Cercanos" ng-init="init()" hide-back-button="true">
 
-  <ion-content scroll="false" class="has-footer has-map" ng-controller="RestaurantesCercanosCtrl">
-		<map center="current-location" zoom="15">
+  <ion-content scroll="true" class="has-footer has-map" ng-controller="RestaurantesCercanosCtrl">
 
-			<map-type name="coordinate" object="CoordMapType" center="current-location">
- 			
- 				<marker position="current-location" icon="{path:'CIRCLE', scale: 8 }" ></marker>
+<map center="current-location" zoom="14">
+
+			<map-type name="coordinate" object="CoordMapType">
+    		<info-window id="1" position="current-location" visible="true">
+				<div ng-non-bindable="">
+					Aqui estas!
+				</div>
+			</info-window>
 			
-				<marker ng-repeat="m in markers" id="{{m.id}}"
-					position="[{{m.latitud}},{{m.longitud}} ]"
-					visible="true"
-					animation="DROP"
-					on-click="showInfoWindow(event, 'bar')"
-					>
-				</marker>
+
+			<marker ng-repeat="m in markers"
+				position="[ {{m.latitud}}, {{m.longitud}} ]"s
+				visible="true">
+			</marker>
 
     		</map-type>
 			
-		</map>
+		</map>	
   </ion-content>
 </ion-view>
