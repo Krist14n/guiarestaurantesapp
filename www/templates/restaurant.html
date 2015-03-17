@@ -50,14 +50,13 @@
 					</map>
 					
 				</div>
-
-
+				
 				<p ng-repeat="direccion in r.address">
 					{{direccion.branch}}
 				</p>
 
 				<p ng-repeat="tels in r.address">
-					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
+					<a ng-repeat="tel1 in tels.tel"> {{tel1}}<br></a>
 				</p>
 
 				<h2>Precio promedio por persona</h2>

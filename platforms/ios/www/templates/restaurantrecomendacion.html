@@ -1,18 +1,12 @@
 <ion-view  view-title="Guía Gourmet 2014" ng-init="init()">
 
   <ion-content ng-repeat="r in restaurant" class="has-footer">
-  		<div  class="row">
-  			<div class="col col-33"></div>
-  			<div>
-		  		<img src="img/logomb3.png" style="width:50px; height:41px;" class="logorecomendacion">
-  			</div>
-  			
-  		</div>
-  			
-  		<div class="col col-33" style="">
-  			<img src="img/recomendacion.png" style="height:67px;">
-  		</div>
-
+	  			<div>	
+		  			<img class="center" src="img/logomb3.png" style="width:50px; height:41px; margin-top:10px;">
+			  	</div>	
+			  	<div>
+			  		<img class="center" src="img/recomendacion.png" style="height:67px;margin-top:10px;">
+			  	</div>	
 		<div class="list card">
 
 			<div class="item ">
@@ -61,12 +55,11 @@
 					
 				</div>
 
-
 				<p ng-repeat="direccion in r.address">
 					{{direccion.branch}}
 				</p>
 				<p ng-repeat="tels in r.address">
-					<a ng-repeat="tel1 in tels.tel"> {{tel1}} </a>
+					<a ng-repeat="tel1 in tels.tel"> {{tel1}}<br></a>
 				</p>
 				<h2>Precio promedio por persona</h2>
 				<p>

@@ -42,7 +42,7 @@
 	{
 		"id": "9",
 		"name": "Coreana",
-		"cook": "coreana"
+		"cook": "cor"
 	},
 	{
 		"id": "10",
@@ -67,7 +67,8 @@
 	},
 	{
 		"id": "14",
-		"name": "Hindú"
+		"name": "Hindú",
+		"cook": "hindu"
 	},
 		{
 		"id": "15",
@@ -116,7 +117,8 @@
 	},
 	{
 		"id": "24",
-		"name": "Rosticería"
+		"name": "Rosticería",
+		"cook": "rosticero"
 	},
 	{
 		"id": "25",
@@ -125,7 +127,8 @@
 	},
 	{
 		"id": "26",
-		"name": "Tailandesa"
+		"name": "Tailandesa",
+		"cook": "tai"
 	},
 	{
 		"id": "27",

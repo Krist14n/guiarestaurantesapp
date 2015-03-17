@@ -5,6 +5,98 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngMap'])
+.directive('myMap', function($http) {
+    var jsonArr = [];
+    var json1 =[];
+
+    // directive link function
+    var link = function(scope, element, attrs) {
+        var map, infoWindow;
+        var markers = [];
+        
+        // map config
+        var mapOptions = {
+            //center: new google.maps.LatLng(50, 2),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+        };
+        
+        // init the map
+        function initMap() {
+            if (map === void 0) {
+                map = new google.maps.Map(element[0], mapOptions);
+                getLocation();
+
+                function getLocation() {
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                  } else {
+                    alert("Geolocation is not supported by this browser.");
+                  }
+                }
+                function showPosition(position) {
+                  var lat = position.coords.latitude;
+                  var lng = position.coords.longitude;
+                  map.setCenter(new google.maps.LatLng(lat, lng));
+                  
+                  var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: map,
+                    icon: "img/current.png"
+                  });
+                  marker.setMap(map);
+                }
+
+                // place a marker
+                function setMarker(map, position, title, content) {
+                    var marker;
+                    var markerOptions = {
+                        position: position,
+                        map: map,
+                        title: title,
+                        icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    };
+
+                    marker = new google.maps.Marker(markerOptions);
+                    markers.push(marker); // add marker to array
+                  
+                    google.maps.event.addListener(marker, 'click', function () {
+                        // close window if not undefined
+                        if (infoWindow !== void 0) {
+                            infoWindow.close();
+                        }
+                        // create new window
+                        var infoWindowOptions = {
+                            content: content
+                        };
+                        infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+                        infoWindow.open(map, marker);
+                    });
+                }
+
+                $http.get('js/guiderest.json').success(function(data){ 
+
+                //var markers2 = JSON.search(data, '//*[id]');
+
+                for( var i = 0; i<data.length; i++ ){
+                    setMarker(map, new google.maps.LatLng(data[i].map.latitud, data[i].map.longitud), " ", "<a href='#/app/restaurant/"+data[i].id+"'>"+data[i].name+"</a>");
+                  }
+                })
+            }
+        }     
+        
+        // show the map and place some markers
+        initMap();
+    };
+    
+    return {
+        restrict: 'A',
+        template: '<div id="gmaps"></div>',
+        replace: true,
+        link: link
+    };
+})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

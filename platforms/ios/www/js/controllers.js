@@ -468,31 +468,9 @@ app.run(function($cordovaSplashscreen) {
 })
 
 
+
 .controller('RestaurantesCercanosCtrl', function($scope, $http){
-  var lon;
-  var lat;
-  var markers = [];
-  var markers2 = [];
-
-  $http.get('js/guiderest.json').success(function(data){ 
-
-    var markers2 = JSON.search(data, '//*[id]');
-
-    for( var i = 0; i<data.length; i++ ){
-      markers.push(data[i].map);
-      //markers.push(data[i].id);
-      //markers.push(data[i].name);
-    }
-
-    
-    $scope.markers = markers;
-      
-  });
-
-  function showInfoWindow(){
-    console.log(test);
-  }
-
+ 
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {

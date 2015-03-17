@@ -33,7 +33,7 @@
 		"id": "6",
 		"name": "De vinos",
 		"plancat": "wine",
-		"icon": "ion-ios-wineglass"
+		"icon": "ion-wineglass"
 	},
 	{
 		"id": "7",
@@ -81,7 +81,7 @@
 		"id": "14",
 		"name": "Solteros",
 		"plancat": "single",
-		"icon": "ion-heart-broken"
+		"icon": "ion-person"
 	},
 	{
 		"id": "15",

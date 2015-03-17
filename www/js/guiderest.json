@@ -1102,7 +1102,7 @@
 				"parking": "Valet parking."
 			}
 		],
-		"cook": "null",
+		"cook": "rosticero",
 		"zone": [
 			"roma"
 		],
