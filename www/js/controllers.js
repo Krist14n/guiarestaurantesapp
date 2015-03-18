@@ -170,7 +170,7 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
-      if (diff > 400) {
+      if (diff > 200) {
           return true;
       } else {
           return false;
@@ -212,7 +212,7 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
-      if (diff > 400) {
+      if (diff > 200) {
           return true;
       } else {
           return false;
@@ -221,9 +221,10 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.go = function ( path ) {
       if ($scope.canClickInList()) {
-        $location.path( path );
+       
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
     };
@@ -261,7 +262,7 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
-      if (diff > 400) {
+      if (diff > 200) {
           return true;
       } else {
           return false;
@@ -295,7 +296,7 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
-      if (diff > 150) {
+      if (diff > 200) {
           return true;
       } else {
           return false;

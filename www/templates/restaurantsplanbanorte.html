@@ -21,7 +21,7 @@
 
 <ion-content class="has-header has-subheader has-footer">
 	<ion-list>
-		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " href="#/app/restaurantplanbanorte/{{restaurant.plancat}}"> 
+		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' "  ng-click="go(/app/restaurantplanbanorte/{{restaurant.plancat}})"> 
 			<i class="icon-left icon {{restaurant.icon}} button-clear button-dark icono"></i>
 				{{restaurant.name}}
 		</ion-item>
