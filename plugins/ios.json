@@ -61,19 +61,19 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.myapp261924"
+            "PACKAGE_NAME": "com.guiamb.guiamb261924"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.myapp261924"
+            "PACKAGE_NAME": "com.guiamb.guiamb261924"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.myapp261924"
+            "PACKAGE_NAME": "com.guiamb.guiamb261924"
         },
         "org.apache.cordova.geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.myapp261924"
+            "PACKAGE_NAME": "com.guiamb.guiamb261924"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.myapp261924"
+            "PACKAGE_NAME": "com.guiamb.guiamb261924"
         }
     },
     "dependent_plugins": {}

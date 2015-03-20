@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>AEBA76C7-B0F7-46E4-906B-B30DA50483BD</string>
+	<string>B538B59C-1A2D-4DD0-A04D-5D6ECEA523F2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>myApp</string>
+	<string>Guía MB</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C051E2157D9B8C7C3F70A38B16D80721B9914021</key>
 		<string>https://github.com/Krist14n/guiarestaurantesapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>platforms/ios/myApp.xcodeproj</string>
+	<string>platforms/ios/Guía MB.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C051E2157D9B8C7C3F70A38B16D80721B9914021</key>
