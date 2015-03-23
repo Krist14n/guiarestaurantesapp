@@ -21,7 +21,9 @@
 
 <ion-content class="has-header has-subheader has-footer" on-scroll="scrollList()">
 	<ion-list>
-		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'title' " href="#/app/restaurant/{{restaurant.id}}"> 
+		<ion-item 
+		ng-repeat="restaurant in restaurants | filter:query | orderBy: 'title'" 
+		href="#/app/restaurant/{{restaurant.id}}"> 
 			<i class="button-clear button-dark"></i>
 				{{restaurant.name}}
 		</ion-item>

@@ -61,6 +61,7 @@ app.run(function($cordovaSplashscreen) {
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
       if (diff > 200) {
+
           return true;
       } else {
           return false;
@@ -120,14 +121,18 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/tipos_comida.json').success(function(data){
       $scope.restaurants = data;
   })
-  $scope.scrollList = function() {
+     $scope.lastScrolling = new Date().getTime();
+
+    $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
     };
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
+
       if (diff > 200) {
+
           return true;
       } else {
           return false;
@@ -139,11 +144,12 @@ app.run(function($cordovaSplashscreen) {
         $location.path( path );
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
+   };
 
-  $ionicNavBarDelegate.showBackButton(false)
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Internal Restaurant list by food 
@@ -163,14 +169,19 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/por_zona.json').success(function(data){
       $scope.restaurants = data;
   })
-  $scope.scrollList = function() {
+      $scope.lastScrolling = new Date().getTime();
+
+    $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
     };
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
+      
       if (diff > 200) {
+     
+
           return true;
       } else {
           return false;
@@ -182,10 +193,12 @@ app.run(function($cordovaSplashscreen) {
         $location.path( path );
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
-  $ionicNavBarDelegate.showBackButton(false);
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Internal Restaurant list by zone 
@@ -205,14 +218,18 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/por_plan.json').success(function(data){
       $scope.restaurants = data;
   })
-  $scope.scrollList = function() {
+      $scope.lastScrolling = new Date().getTime();
+
+    $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
     };
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
+      
       if (diff > 200) {
+
           return true;
       } else {
           return false;
@@ -221,14 +238,15 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.go = function ( path ) {
       if ($scope.canClickInList()) {
-       $location.path( path );
+        $location.path( path );
       }
     };
 
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
-  $ionicNavBarDelegate.showBackButton(false);
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Internal Restaurant list by plan 
@@ -289,6 +307,8 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/tipos_comida.json').success(function(data){
       $scope.restaurants = data;
   })
+    $scope.lastScrolling = new Date().getTime();
+
     $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
@@ -296,7 +316,9 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
+      
       if (diff > 200) {
+
           return true;
       } else {
           return false;
@@ -308,11 +330,12 @@ app.run(function($cordovaSplashscreen) {
         $location.path( path );
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
+   };
 
-  $ionicNavBarDelegate.showBackButton(false)
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 .controller('RestaurantsListByCookBanorteCtrl', function($scope, $stateParams, $http, $ionicNavBarDelegate){
@@ -335,6 +358,8 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/por_zona.json').success(function(data){
       $scope.restaurants = data;
   })
+    $scope.lastScrolling = new Date().getTime();
+
     $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
@@ -354,10 +379,12 @@ app.run(function($cordovaSplashscreen) {
         $location.path( path );
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
-  $ionicNavBarDelegate.showBackButton(false);
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Restaurantes Banorte Lista por Zona 
@@ -405,6 +432,8 @@ app.run(function($cordovaSplashscreen) {
   $http.get('js/por_plan.json').success(function(data){
       $scope.restaurants = data;
   })
+    $scope.lastScrolling = new Date().getTime();
+
     $scope.scrollList = function() {
       var dat = new Date().getTime();
       $scope.lastScrolling = new Date().getTime();
@@ -412,6 +441,7 @@ app.run(function($cordovaSplashscreen) {
 
     $scope.canClickInList = function() {
       var diff =  new Date().getTime() - $scope.lastScrolling;
+     
       if (diff > 200) {
           return true;
       } else {
@@ -424,10 +454,12 @@ app.run(function($cordovaSplashscreen) {
         $location.path( path );
       }
     };
+
     $scope.goMenu = function ( path ) {
         $location.path( path );
-    };
-  $ionicNavBarDelegate.showBackButton(false);
+   };
+
+    $ionicNavBarDelegate.showBackButton(false);
 })
 
 //Restaurantes Banorte Lista por Plan 
