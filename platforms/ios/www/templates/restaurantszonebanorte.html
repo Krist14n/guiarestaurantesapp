@@ -22,7 +22,10 @@
 
 <ion-content class="has-header has-subheader has-footer" on-scroll="scrollList()">
 	<ion-list>
-		<ion-item ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " ng-click="go('/app/restaurantzonebanorte/{{restaurant.zone}}')"> 
+		<ion-item
+		href="#" 
+		ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name'" 
+		ng-click="go('/app/restaurantzonebanorte/{{restaurant.zone}}')"> 
 			<i class="button-clear button-dark"></i>
 				{{restaurant.name}}
 		</ion-item>
