@@ -21,7 +21,7 @@
         
 		<form class="form-inline">
 				<label class=" item-input label">
-					<i class="icon ion-search placeholder-icon"></i>
+					<i class="ion-search placeholder-icon" style="color=#d42135;fo"></i>
 					<input ng-model="query.name" type="text" placeholder="Buscar restaurantes" autofocus>
 				</label>
 		</form>
@@ -33,7 +33,7 @@
 			href="#" 
 			ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " 
 			ng-click="go('/app/restaurant/{{restaurant.id}}')"> 
-				<i class="icon-left icon ion-fork button-clear button-dark"></i>
+				<i class="icon-left icon ion-fork button-clear plan-icon button-dark"></i>
 					{{restaurant.name}}
 			</ion-item>
 		</ion-list>

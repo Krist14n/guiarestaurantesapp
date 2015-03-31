@@ -33,7 +33,7 @@
 			href="#"
 			ng-repeat="restaurant in restaurants | filter:query | orderBy: 'name' " 
 			ng-click="go('/app/restaurant/{{restaurant.id}}')"> 
-				<i class="icon-left icon ion-fork button-clear button-dark"></i>
+				<i class="icon-left icon ion-fork plan-icon button-clear button-dark"></i>
 					{{restaurant.name}}
 			</ion-item>
 		</ion-list>
