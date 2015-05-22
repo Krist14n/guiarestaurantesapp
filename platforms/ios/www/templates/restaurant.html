@@ -16,7 +16,7 @@
 				  {{r.review}}
 				</p>
 
-				<h2>Calificación</h2>
+				<h2 class="titles-resta">Calificación</h2>
 					<div class="row">
 						<div class="col">Comida</div>
 						<div class="col">Ambiente</div>
@@ -26,18 +26,18 @@
 						<div  ng-repeat="calif in r.calification track by $index" class="col">{{calif}}</div>
 					</div>
 
-				<h2>Ideal Para:</h2>
+				<h2 class="titles-resta">Ideal Para:</h2>
 				<ul>
 				<p ng-repeat="ideal in r.ideal">
 					<span class="vineta">&#8226;</span> {{ ideal}}
 				</p>
 				</ul>
-				<h2>Marco Recomienda:</h2>
+				<h2  class="titles-resta">Marco Recomienda:</h2>
 				<p ng-repeat="recom in r.mrecommend">
 					<span class="vineta">&#8226;</span> {{recom}}
 				</p>
 
-				<h2>Dirección</h2>	
+				<h2  class="titles-resta">Dirección</h2>	
 
 
 				<div class="angular-google-map-container">
@@ -59,7 +59,7 @@
 					<a ng-repeat="tel1 in tels.tel" href="tel:{{ tel1}}}"> {{tel1}}<br></a>
 				</p>
 
-				<h2>Precio promedio por persona</h2>
+				<h2  class="titles-resta">Precio promedio por persona</h2>
 				<p>
 					<a>$ {{r.cost}}</a>
 				</p>
